@@ -4,10 +4,15 @@
 	};
 
 	aliases {
-		adcchamberpressure = &i2c1ads48;
+		ads1015device = &i2c1ads48;
 	};
 };
 
+// pin 7/8
+&lpuart4 {
+	status = "okay";
+	current-speed = < 230400 >;
+};
 
 &lpi2c1 {
 	status = "okay";

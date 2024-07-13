@@ -6,13 +6,13 @@
 #include "ads1115_defs.h"
 
 // i2c adc devices
-struct i2c_dt_spec ads_i2c = I2C_DT_SPEC_GET(DT_ALIAS(adcchamberpressure));
+struct i2c_dt_spec ads_i2c = I2C_DT_SPEC_GET(DT_ALIAS(ads1015device));
 
 int main_thread(void)
 {
     int ret;
 
-    if (!device_is_ready(ads_i2c->bus))
+    if (!device_is_ready(ads_i2c.bus))
     {
         printk("the i2c bus for the ads1015 is not ready\n");
         return -1;
@@ -22,7 +22,7 @@ int main_thread(void)
     {
         // send configuration to ads1015
         ret = ADS1x15_set_config(
-            ads_i2c,
+            &ads_i2c,
             (ADS1115_REG_CONFIG_MUX_DIFF_0_1 |
              ADS1115_REG_CONFIG_OS_SINGLE |
              ADS1115_REG_CONFIG_PGA_6_144V |
@@ -38,9 +38,9 @@ int main_thread(void)
         // wait for data
         k_sleep(K_MSEC(100));
 
-        int16_t 16bit_number = ADS1x15_read(ads_i2c);
-        double voltage = 16bit_number * (6.144 / (32768));
-        printk("channel 1: %lf", bufferVolts);
+        int16_t value = ADS1x15_read(&ads_i2c);
+        double voltage = value * (6.144 / (32768));
+        printk("channel 1: %lf", voltage);
     }
 
     return 0;

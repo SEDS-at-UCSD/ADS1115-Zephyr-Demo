@@ -3,6 +3,7 @@ MCU=TEENSY41
 BAUD_RATE=115200
 PYTHON3=python3
 
+.PHONY: build
 
 build:
 	west build -p auto -b $(BOARD) app
