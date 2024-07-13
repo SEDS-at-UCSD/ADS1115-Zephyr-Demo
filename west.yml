@@ -1,0 +1,40 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  self:
+    west-commands: scripts/west-commands.yml
+
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+    - name: SEDS-at-UCSD
+      url-base: git@github.com:SEDS-at-UCSD
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: 38f554ef4f99281fc9d546da8d13eefccc03d30c
+      import:
+        path-blocklist: modules/hal/*
+
+    - name: hal_nxp
+      revision: d957472002a3758154f402e982d95ce90cf58e12
+      path: modules/hal/nxp
+      remote: zephyrproject-rtos
+      # cmsis is needed for ARM Cortex-M; do not remove
+    - name: cmsis
+      revision: 74981bf893e8b10931464b9945e2143d99a3f0a3
+      path: modules/hal/cmsis
+      remote: zephyrproject-rtos
+    - name: hal_espressif
+      revision: 73e7af1e2ed64571ce49ff9f07dc02690b9f2df5
+      path: modules/hal/espressif
+      remote: zephyrproject-rtos
+    - name: hal_xtensa
+      revision: 63f655362423aa49507da7977a2d37142e8debeb
+      path: modules/hal/xtensa
+      remote: zephyrproject-rtos
+    - name: Lander-tools
+      revision: main
+      remote: SEDS-at-UCSD

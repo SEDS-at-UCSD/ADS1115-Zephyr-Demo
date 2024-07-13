@@ -1,0 +1,25 @@
+/ {
+	chosen {
+		zephyr,console = &lpuart4;
+	};
+
+	aliases {
+		adcchamberpressure = &i2c1ads48;
+	};
+};
+
+
+&lpi2c1 {
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_FAST>;
+
+	i2c1ads48:ads1015@48 {
+		compatible = "ti,ads1015";
+		status = "okay";
+		reg = <0x48>;
+		label = "ADS1015 addr48 @ i2c1";
+		#io-channel-cells = <1>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+	};
+};

@@ -1,0 +1,17 @@
+# editors
+.vscode
+*.swp
+*~
+
+# python
+.venv
+__pycache__/
+
+# build
+/build*
+out
+
+# cpp vscode extensions
+.cache
+*/tags
+tags
